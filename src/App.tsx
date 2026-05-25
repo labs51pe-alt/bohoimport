@@ -28,11 +28,11 @@ export default function App() {
   const [showQrModal, setShowQrModal] = useState<boolean>(false);
   const [copiedLink, setCopiedLink] = useState<boolean>(false);
 
-  // Business specs matching the user attachment
-  const stats = [
-    { label: 'Publicaciones', count: '16' },
-    { label: 'Seguidores', count: '216' },
-    { label: 'Seguidos', count: '53' }
+  // Inspirational highlights for shoppers
+  const highlights = [
+    { label: 'PRECIO MAYORISTA', title: 'Desde 1 Docena ⭐️', desc: 'Los mejores precios' },
+    { label: 'ENVÍOS RAPIDOS', title: 'A Todo el Perú 📦', desc: 'Despachos diarios' },
+    { label: 'DISEÑOS ÚNICOS', title: 'Calidad Boho ✨', desc: 'Bolsas y accesorios' }
   ];
 
   const handleShareApp = () => {
@@ -100,15 +100,21 @@ export default function App() {
             </p>
           </div>
 
-          {/* Meta Statistics, directly matching the screenshot! */}
-          <div id="stats-indicators" className="flex items-center justify-center space-x-8 my-4.5 py-3 px-6 bg-white rounded-2xl border border-zinc-100/80 shadow-2xs divide-x divide-zinc-100 min-w-[280px]">
-            {stats.map((stat, i) => (
-              <div key={i} className={`flex-1 text-center ${i > 0 ? 'pl-8' : ''}`}>
-                <span className="block font-black font-display text-zinc-900 text-base leading-none">
-                  {stat.count}
+          {/* High-converting purchase highlights */}
+          <div id="trust-indicators" className="grid grid-cols-3 gap-2 my-4 w-full max-w-lg">
+            {highlights.map((item, i) => (
+              <div 
+                key={i} 
+                className="bg-white rounded-xl p-2.5 border border-zinc-100 shadow-2xs flex flex-col justify-between text-center hover:shadow-xs transition-shadow duration-300"
+              >
+                <span className="text-[8px] md:text-[9px] text-[#db2777] font-bold uppercase tracking-wider block font-mono">
+                  {item.label}
                 </span>
-                <span className="text-[10px] text-zinc-400 font-medium uppercase tracking-wider block mt-1">
-                  {stat.label}
+                <span className="block font-extrabold font-display text-zinc-900 text-xs md:text-sm mt-1 mb-0.5 leading-snug">
+                  {item.title}
+                </span>
+                <span className="text-[9px] md:text-[10px] text-zinc-500 font-medium block leading-none">
+                  {item.desc}
                 </span>
               </div>
             ))}
