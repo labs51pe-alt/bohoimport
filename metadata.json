@@ -1,0 +1,6 @@
+{
+  "name": "Boho Import - Enlaces y Catálogo",
+  "description": "Directorio interactivo de redes sociales, catálogo de bolsas de regalo y calculadora de combos personalizados para Boho Import.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
