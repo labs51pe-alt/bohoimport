@@ -13,7 +13,8 @@ import {
   QrCode, 
   Copy,
   ShoppingBag,
-  Info
+  Info,
+  FileDown
 } from 'lucide-react';
 import Logo from './components/Logo';
 import WidgetLinks from './components/WidgetLinks';
@@ -171,6 +172,52 @@ export default function App() {
             </button>
           </div>
 
+        </div>
+
+        {/* Father's Day PDF Catalog Promotion Banner Card */}
+        <div id="pdf-catalog-banner" className="mt-6 w-full max-w-lg mx-auto px-1">
+          <div className="relative overflow-hidden rounded-2xl border border-rose-100 bg-gradient-to-br from-rose-50/70 via-white to-amber-50/50 p-5 shadow-2xs hover:shadow-xs transition-all duration-300">
+            {/* Background absolute shapes for high-end aesthetic */}
+            <div className="absolute top-0 right-0 w-24 h-24 bg-rose-200/20 rounded-full blur-xl pointer-events-none" />
+            <div className="absolute -bottom-4 -left-4 w-20 h-20 bg-amber-100/30 rounded-full blur-xl pointer-events-none" />
+            
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 relative z-10">
+              <div className="space-y-1.5 flex-1 pr-1 text-left">
+                <div className="flex items-center space-x-1.5 flex-wrap gap-y-1">
+                  <span className="text-[9px] font-extrabold px-2 py-0.5 rounded-full bg-rose-600 text-white font-mono uppercase tracking-wider shadow-2xs">
+                    Colección Especial
+                  </span>
+                  <span className="text-[10px] bg-amber-50 text-amber-800 font-bold px-2 py-0.5 rounded-md flex items-center space-x-1 border border-amber-200/50">
+                    <span>PDF Directo</span>
+                  </span>
+                </div>
+                
+                <h3 className="text-base font-black text-zinc-900 font-display tracking-tight leading-tight pt-0.5">
+                  Catálogo Día del Padre 👔🎁
+                </h3>
+                
+                <p className="text-[11px] text-zinc-500 font-semibold leading-relaxed">
+                  Bolsas de regalo exclusivas, empaques premium y novedades al por mayor para sorprender a papá.
+                </p>
+              </div>
+
+              <a
+                href="/ultimo-dia-del-padre.pdf"
+                download="ÚLTIMO DIA DEL PADRE.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto bg-zinc-900 hover:bg-zinc-800 text-white font-extrabold py-3.5 px-5 rounded-xl text-xs uppercase tracking-wide transition-all duration-300 flex items-center justify-center space-x-2 shrink-0 shadow-xs cursor-pointer hover:scale-102 active:scale-98"
+              >
+                <FileDown className="w-4 h-4 text-amber-300 animate-pulse" />
+                <span>Ver Catálogo PDF</span>
+              </a>
+            </div>
+            
+            <div className="mt-3.5 pt-3 border-t border-zinc-100 flex items-center space-x-1.5 text-[10px] text-zinc-400 font-mono">
+              <span className="text-zinc-300">•</span>
+              <span>¡Acceso directo a tu catálogo desde cualquier celular!</span>
+            </div>
+          </div>
         </div>
 
         {/* 4. Beautiful Horizontal Navigation Tabs */}
