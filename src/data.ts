@@ -2,6 +2,85 @@ import { Product, ComboComplement } from './types';
 
 export const PRODUCTS: Product[] = [
   {
+    id: 'lonchera-2-equipos',
+    name: 'Caja Regalo Lonchera-2 "Equipos de Fútbol" ⚽',
+    description: 'Caja de regalo tipo lonchera con diseños oficiales de equipos del fútbol peruano. Perfecta para empacar camisetas, tazas u obsequios especiales del Día del Padre.',
+    price: 3.50,
+    originalPrice: 4.50,
+    wholesalePrice: 2.00,
+    minWholesaleQty: 12,
+    category: 'cajas',
+    imageGradient: 'from-blue-200 via-zinc-100 to-red-100',
+    patternType: 'stripes',
+    ribbonColor: '#3b82f6',
+    sizes: ['Económica (37x19x14.5 cm)'],
+    features: [
+      'La docena contiene 4 diseños de equipos (Alianza Lima, Universitario, Sporting Cristal, Sport Boys)',
+      'Asa de transporte incorporada muy resistente',
+      'Ventas al por mayor ideal para campañas',
+      'Alto en amor a la camiseta ⚽'
+    ],
+    variants: ['Surtidos (Recomendado) 👔', 'Alianza Lima 🔵', 'Universitario de Deportes 🔴', 'Sporting Cristal 🔵⚪', 'Sport Boys 🌸'],
+    priceLevels: [
+      { qty: 1, price: 3.50, label: 'Unitario minorista' },
+      { qty: 12, price: 2.00, label: 'Docena (s/24 la docena)' },
+      { qty: 100, price: 1.80, label: 'Ciento (s/180 el ciento)' }
+    ],
+    inStock: true
+  },
+  {
+    id: 'caja-tapa-dura-futbol',
+    name: 'Caja Regalo con Tapa Dura "Fútbol Especial" 🏆',
+    description: 'Caja premium de cartón prensado con brillo especial e impresión del equipo de alta nitidez. La base interna para latas se puede retirar para acondicionar polos, camisetas y más.',
+    price: 12.00,
+    originalPrice: 15.00,
+    wholesalePrice: 8.00,
+    minWholesaleQty: 12,
+    category: 'cajas',
+    imageGradient: 'from-indigo-100 via-slate-100 to-yellow-100',
+    patternType: 'solid',
+    ribbonColor: '#eab308',
+    sizes: ['Grande (32x20x7 cm)'],
+    features: [
+      'La docena contiene 2 nuevos diseños premium de Alianza y Universitario',
+      'Cartón prensado rígido súper resistente con brillo especial',
+      'Base interior de latas removible para máxima versatilidad del regalo',
+      'Ventas al por mayor para campañas masivas'
+    ],
+    variants: ['Surtidos (Recomendado) 👔', 'Alianza Lima 🔵', 'Universitario 🔴'],
+    priceLevels: [
+      { qty: 1, price: 12.00, label: 'Unitario minorista' },
+      { qty: 12, price: 8.00, label: 'Docena (s/96 la docena)' }
+    ],
+    inStock: true
+  },
+  {
+    id: 'globos-diseno-padre',
+    name: 'Globos Metálicos "Día del Padre" (Talla #10) 🎈',
+    description: 'Globos decorativos metálicos con atractivos mensajes de felicitación para sorprender a papá en su día especial.',
+    price: 0.80,
+    originalPrice: 1.20,
+    wholesalePrice: 0.40,
+    minWholesaleQty: 100,
+    category: 'accesorios',
+    imageGradient: 'from-rose-50 via-amber-50 to-emerald-100',
+    patternType: 'stars',
+    ribbonColor: '#f43f5e',
+    sizes: ['Talla #10 (Diámetro ~25cm)'],
+    features: [
+      'El ciento viene surtido en hermosos diseños para papá',
+      'Material metálico resistente de excelente duración',
+      'Mensajes variados: "Feliz Día del Padre", "Eres el Mejor Papá", "Super Dad"',
+      'Alto en sutileza ✨'
+    ],
+    variants: ['Surtido de Diseños 🎈', 'Feliz Día del Padre 👔', 'Eres el Mejor Papá 🏆', 'Super Dad ⚡'],
+    priceLevels: [
+      { qty: 1, price: 0.80, label: 'Unitario minorista' },
+      { qty: 100, price: 0.40, label: 'Ciento (s/40 el ciento)' }
+    ],
+    inStock: true
+  },
+  {
     id: 'bolsa-kraft-rayas',
     name: 'Bolsa de Regalo Kraft Rayas Boho',
     description: 'La bolsa insignia inspirada en nuestro logotipo. Papel kraft premium resistente con patrón de rayas diagonales elegantes y asa de algodón trenzado negra.',

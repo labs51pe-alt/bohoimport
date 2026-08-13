@@ -21,11 +21,12 @@ import WidgetLinks from './components/WidgetLinks';
 import WidgetCatalog from './components/WidgetCatalog';
 import WidgetCalculator from './components/WidgetCalculator';
 import WidgetAbout from './components/WidgetAbout';
+import { HeroSlider } from './components/HeroSlider';
 
-type TabType = 'enlaces' | 'nosotros';
+type TabType = 'enlaces' | 'catalogo' | 'nosotros';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<TabType>('enlaces');
+  const [activeTab, setActiveTab] = useState<TabType>('catalogo');
   const [showQrModal, setShowQrModal] = useState<boolean>(false);
   const [copiedLink, setCopiedLink] = useState<boolean>(false);
 
@@ -72,7 +73,7 @@ export default function App() {
       </div>
 
       {/* 3. Primary Card Overlay & Profile */}
-      <div className="max-w-2xl mx-auto px-4 -mt-20 relative z-10">
+      <div className="max-w-2xl lg:max-w-6xl mx-auto px-4 md:px-6 -mt-20 relative z-10">
         
         {/* Profile Header Block */}
         <div className="text-center flex flex-col items-center">
@@ -88,30 +89,30 @@ export default function App() {
           {/* Slogan details and info */}
           <div className="mt-4 space-y-1">
             <div className="flex items-center justify-center space-x-1.5">
-              <h1 className="text-2xl font-black tracking-tight font-display text-zinc-900">
+              <h1 className="text-2xl md:text-3xl font-black tracking-tight font-display text-zinc-900">
                 bohoimport
               </h1>
-              <span className="text-xs bg-zinc-100 text-zinc-600 font-bold px-2 py-0.5 rounded-md border border-zinc-200">
+              <span className="text-xs bg-zinc-100 text-zinc-600 font-bold px-2.5 py-0.5 rounded-md border border-zinc-200">
                 E.I.R.L
               </span>
             </div>
             
-            <p className="text-xs font-bold text-rose-600 tracking-wide font-display">
-              Boho | Bolsas de regalo 🎁
+            <p className="text-xs md:text-sm font-bold text-rose-600 tracking-wide font-gift">
+              Boho | Bolsas & Empaques de Regalo 🎁✨
             </p>
           </div>
 
           {/* High-converting purchase highlights */}
-          <div id="trust-indicators" className="grid grid-cols-3 gap-2 my-4 w-full max-w-lg">
+          <div id="trust-indicators" className="grid grid-cols-3 gap-2 lg:gap-4 my-4 w-full max-w-lg lg:max-w-3xl">
             {highlights.map((item, i) => (
               <div 
                 key={i} 
-                className="bg-white rounded-xl p-2.5 border border-zinc-100 shadow-2xs flex flex-col justify-between text-center hover:shadow-xs transition-shadow duration-300"
+                className="bg-white rounded-2xl p-2.5 lg:p-3.5 border border-rose-100/80 shadow-2xs flex flex-col justify-between text-center hover:shadow-xs hover:border-rose-300 transition-all duration-300 hover:-translate-y-0.5 gift-shimmer"
               >
-                <span className="text-[8px] md:text-[9px] text-[#db2777] font-bold uppercase tracking-wider block font-mono">
+                <span className="text-[8px] md:text-[9px] text-rose-600 font-extrabold uppercase tracking-wider block font-gift">
                   {item.label}
                 </span>
-                <span className="block font-extrabold font-display text-zinc-900 text-xs md:text-sm mt-1 mb-0.5 leading-snug">
+                <span className="block font-black font-display text-zinc-900 text-xs md:text-sm lg:text-base mt-1 mb-0.5 leading-snug">
                   {item.title}
                 </span>
                 <span className="text-[9px] md:text-[10px] text-zinc-500 font-medium block leading-none">
@@ -121,8 +122,8 @@ export default function App() {
             ))}
           </div>
 
-          {/* Bio text (Matching screenshot) */}
-          <div className="max-w-md bg-white/40 backdrop-blur-md rounded-2xl p-4 border border-zinc-100/60 shadow-3xs space-y-2 text-center text-xs text-zinc-600">
+          {/* Bio text */}
+          <div className="max-w-md lg:max-w-2xl bg-white/60 backdrop-blur-md rounded-2xl p-4 border border-zinc-100/80 shadow-3xs space-y-2 text-center text-xs md:text-sm text-zinc-600">
             <p className="font-semibold text-zinc-800">
               📌 Complementos de regalos y más 🤩🎁🛍️🎈
             </p>
@@ -138,12 +139,12 @@ export default function App() {
           </div>
 
           {/* Header Action Buttons */}
-          <div className="flex items-center space-x-2.5 mt-5 w-full max-w-sm">
+          <div className="flex items-center space-x-2.5 mt-5 w-full max-w-sm lg:max-w-md">
             <a
               href="https://wa.me/51967651924"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded-xl text-xs tracking-wider uppercase transition-all duration-300 flex items-center justify-center space-x-2 shadow-sm cursor-pointer"
+              className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded-xl text-xs md:text-sm tracking-wider uppercase transition-all duration-300 flex items-center justify-center space-x-2 shadow-sm cursor-pointer"
             >
               <MessageCircle className="w-4 h-4 fill-white" />
               <span>Chatear por WhatsApp</span>
@@ -152,7 +153,7 @@ export default function App() {
             <button
               type="button"
               onClick={handleShareApp}
-              className={`px-4.5 py-3 rounded-xl border text-xs font-bold uppercase transition-all flex items-center justify-center space-x-1.5 cursor-pointer ${
+              className={`px-4.5 py-3 rounded-xl border text-xs md:text-sm font-bold uppercase transition-all flex items-center justify-center space-x-1.5 cursor-pointer ${
                 copiedLink 
                   ? 'bg-emerald-50 border-emerald-300 text-emerald-600' 
                   : 'bg-white hover:bg-zinc-50 border-zinc-200 text-zinc-600'
@@ -174,57 +175,15 @@ export default function App() {
 
         </div>
 
-        {/* Father's Day PDF Catalog Promotion Banner Card */}
-        <div id="pdf-catalog-banner" className="mt-6 w-full max-w-lg mx-auto px-1">
-          <div className="relative overflow-hidden rounded-2xl border border-rose-100 bg-gradient-to-br from-rose-50/70 via-white to-amber-50/50 p-5 shadow-2xs hover:shadow-xs transition-all duration-300">
-            {/* Background absolute shapes for high-end aesthetic */}
-            <div className="absolute top-0 right-0 w-24 h-24 bg-rose-200/20 rounded-full blur-xl pointer-events-none" />
-            <div className="absolute -bottom-4 -left-4 w-20 h-20 bg-amber-100/30 rounded-full blur-xl pointer-events-none" />
-            
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 relative z-10">
-              <div className="space-y-1.5 flex-1 pr-1 text-left">
-                <div className="flex items-center space-x-1.5 flex-wrap gap-y-1">
-                  <span className="text-[9px] font-extrabold px-2 py-0.5 rounded-full bg-rose-600 text-white font-mono uppercase tracking-wider shadow-2xs">
-                    Colección Especial
-                  </span>
-                  <span className="text-[10px] bg-amber-50 text-amber-800 font-bold px-2 py-0.5 rounded-md flex items-center space-x-1 border border-amber-200/50">
-                    <span>PDF Directo</span>
-                  </span>
-                </div>
-                
-                <h3 className="text-base font-black text-zinc-900 font-display tracking-tight leading-tight pt-0.5">
-                  Catálogo Día del Padre 👔🎁
-                </h3>
-                
-                <p className="text-[11px] text-zinc-500 font-semibold leading-relaxed">
-                  Bolsas de regalo exclusivas, empaques premium y novedades al por mayor para sorprender a papá.
-                </p>
-              </div>
-
-              <a
-                href="/ultimo-dia-del-padre.pdf"
-                download="ÚLTIMO DIA DEL PADRE.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto bg-zinc-900 hover:bg-zinc-800 text-white font-extrabold py-3.5 px-5 rounded-xl text-xs uppercase tracking-wide transition-all duration-300 flex items-center justify-center space-x-2 shrink-0 shadow-xs cursor-pointer hover:scale-102 active:scale-98"
-              >
-                <FileDown className="w-4 h-4 text-amber-300 animate-pulse" />
-                <span>Ver Catálogo PDF</span>
-              </a>
-            </div>
-            
-            <div className="mt-3.5 pt-3 border-t border-zinc-100 flex items-center space-x-1.5 text-[10px] text-zinc-400 font-mono">
-              <span className="text-zinc-300">•</span>
-              <span>¡Acceso directo a tu catálogo desde cualquier celular!</span>
-            </div>
-          </div>
-        </div>
+        {/* Interactive Visual Slideshow Carousel */}
+        <HeroSlider onSelectCatalog={() => setActiveTab('catalogo')} />
 
         {/* 4. Beautiful Horizontal Navigation Tabs */}
-        <div id="tabs-navigation-panel" className="mt-8 mb-6 sticky top-2 z-30 bg-white/80 backdrop-blur-md p-1 rounded-2xl border border-zinc-200/60 shadow-sm flex space-x-1">
+        <div id="tabs-navigation-panel" className="mt-8 mb-6 sticky top-2 z-30 bg-white/90 backdrop-blur-md p-1.5 rounded-2xl border border-zinc-200/80 shadow-md flex space-x-1 lg:max-w-2xl lg:mx-auto">
           {[
-            { id: 'enlaces', label: 'Redes 🔗', colorClass: 'hover:text-rose-600' },
-            { id: 'nosotros', label: 'Ubicación 📍', colorClass: 'hover:text-rose-600' }
+            { id: 'catalogo', label: 'Catálogo Tienda 🛍️', colorClass: 'hover:text-rose-600' },
+            { id: 'enlaces', label: 'Redes & Links 🔗', colorClass: 'hover:text-rose-600' },
+            { id: 'nosotros', label: 'Tienda & Envíos 📍', colorClass: 'hover:text-rose-600' }
           ].map((tab) => (
             <button
               key={tab.id}
@@ -252,6 +211,7 @@ export default function App() {
               transition={{ duration: 0.22, ease: 'easeInOut' }}
             >
               {activeTab === 'enlaces' && <WidgetLinks />}
+              {activeTab === 'catalogo' && <WidgetCatalog />}
               {activeTab === 'nosotros' && <WidgetAbout />}
             </motion.div>
           </AnimatePresence>

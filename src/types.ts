@@ -13,6 +13,8 @@ export interface Product {
   sizes: string[];
   features: string[];
   inStock: boolean;
+  variants?: string[]; // Custom product variations like team, style, design
+  priceLevels?: { qty: number; price: number; label: string }[]; // Multi-tiered pricing
 }
 
 export type BagType = 'kraft' | 'estampada' | 'metalizada' | 'caja_bow';
@@ -32,3 +34,15 @@ export interface CustomCombo {
   complements: string[]; // List of complement IDs
   quantity: number;
 }
+
+export interface CartItem {
+  id: string; // unique id composed of productId-size-variant
+  product: Product;
+  size: string;
+  variant: string;
+  quantity: number;
+  unitPrice: number;
+  total: number;
+  priceLabel: string;
+}
+
