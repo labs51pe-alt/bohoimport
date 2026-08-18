@@ -25,6 +25,7 @@ import { Product, CartItem, ServiceItem } from './types';
 import { PRODUCTS, SERVICES } from './data';
 import { NavbarHeader } from './components/NavbarHeader';
 import { Hero3DParallax } from './components/Hero3DParallax';
+import { CategoriesGrid } from './components/CategoriesGrid';
 import { QuickCarousels } from './components/QuickCarousels';
 import { ServicesSection } from './components/ServicesSection';
 import { FastQuoteModal } from './components/FastQuoteModal';
@@ -305,7 +306,15 @@ export default function App() {
               onOpenQuoteModal={() => handleOpenQuoteModal(null)}
             />
 
-            {/* High-speed swipe Horizontal Carousels */}
+            {/* Clean Rounded Categories Grid (Reference Image 2 Style) */}
+            <CategoriesGrid
+              onSelectCategory={(categoryId) => {
+                setActiveTab('catalogo');
+              }}
+              onViewAll={() => setActiveTab('catalogo')}
+            />
+
+            {/* High-speed swipe Horizontal Carousels (Reference Image 1 Style: "Lo más pedido" & "Promociones") */}
             <QuickCarousels
               onSelectProduct={(product) => setSelectedProductForModal(product)}
               onAddToCart={addToCart}
@@ -314,16 +323,16 @@ export default function App() {
               onOpenCatalog={() => setActiveTab('catalogo')}
             />
 
-            {/* Quick WhatsApp Banner CTA */}
-            <div className="rounded-[28px] bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 p-5 sm:p-6 text-white shadow-lg flex flex-col sm:flex-row items-center justify-between gap-4 relative overflow-hidden">
+            {/* Quick WhatsApp Banner CTA (Clean Black & Pastel Red Minimalist Style) */}
+            <div className="rounded-[26px] bg-zinc-950 text-white p-5 sm:p-6 border border-zinc-800 shadow-md flex flex-col sm:flex-row items-center justify-between gap-4 relative overflow-hidden">
               <div className="space-y-1 text-center sm:text-left z-10">
-                <span className="text-[10px] font-extrabold uppercase tracking-wider bg-white/20 px-2.5 py-0.5 rounded-full font-gift">
+                <span className="text-[10px] font-bold uppercase tracking-wider bg-rose-950/80 text-rose-300 border border-rose-800/60 px-2.5 py-0.5 rounded-full">
                   Atención Rápida por Mayor
                 </span>
-                <h3 className="text-lg sm:text-xl font-black font-display tracking-tight">
+                <h3 className="text-lg sm:text-xl font-bold font-display tracking-tight text-white">
                   ¿Necesitas cotizar cientos o fletes a provincia? 📲
                 </h3>
-                <p className="text-xs text-emerald-100 max-w-md">
+                <p className="text-xs text-zinc-400 max-w-md">
                   Recibe atención directa de nuestros asesores en Jr. Andahuaylas 1124. Te enviamos catálogo y fotos reales.
                 </p>
               </div>
@@ -333,35 +342,25 @@ export default function App() {
                 whileTap={{ scale: 0.97 }}
                 type="button"
                 onClick={() => handleOpenQuoteModal(null)}
-                className="bg-white text-emerald-900 font-extrabold px-5 py-3 rounded-2xl text-xs sm:text-sm uppercase tracking-wide font-gift flex items-center space-x-2 shadow-md cursor-pointer shrink-0 z-10"
+                className="bg-rose-600 hover:bg-rose-700 text-white font-bold px-5 py-3 rounded-2xl text-xs sm:text-sm uppercase tracking-wide flex items-center space-x-2 shadow-xs cursor-pointer shrink-0 z-10"
               >
-                <MessageCircle className="w-4 h-4 fill-emerald-600 text-emerald-600" />
-                <span>Cotizar con Asesor 💬</span>
+                <MessageCircle className="w-4 h-4 fill-white" />
+                <span>Cotizar con Asesor</span>
               </motion.button>
 
-              {/* Decorative circle glow */}
-              <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-xl pointer-events-none" />
+              {/* Decorative subtle glow */}
+              <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-rose-600/10 rounded-full blur-2xl pointer-events-none" />
             </div>
 
             {/* Services & Special Solutions Section */}
             <ServicesSection onOpenServiceQuote={handleOpenQuoteModal} />
 
-            {/* Seasonal Slideshow Collection */}
-            <div className="pt-2">
-              <HeroSlider onSelectCatalog={() => setActiveTab('catalogo')} />
-            </div>
-
             {/* Complete Catalog Preview Grid */}
             <div className="space-y-3 pt-2">
               <div className="flex items-center justify-between px-1">
-                <div className="space-y-0.5">
-                  <span className="text-[10px] font-extrabold uppercase tracking-wider text-rose-600 dark:text-rose-400 font-gift">
-                    Explorar Todo el Stock
-                  </span>
-                  <h3 className="text-lg sm:text-xl font-black font-display text-zinc-900 dark:text-white">
-                    Catálogo Mayorista Completo 🛍️
-                  </h3>
-                </div>
+                <h3 className="text-xl sm:text-2xl font-bold font-display text-zinc-950 dark:text-white tracking-tight">
+                  Catálogo Completo
+                </h3>
               </div>
               <WidgetCatalog />
             </div>
@@ -407,6 +406,8 @@ export default function App() {
           setActiveTab(tab);
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
+        onOpenFavorites={() => setIsFavoritesOpen(true)}
+        favoritesCount={favoritesCount}
         onOpenQuoteModal={() => handleOpenQuoteModal(null)}
         cartCount={cartCount}
         cartTotal={cartTotal}

@@ -2,8 +2,8 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { 
   Home, 
-  Sparkles, 
   ShoppingBag, 
+  Heart,
   MessageCircle, 
   ShoppingCart
 } from 'lucide-react';
@@ -11,6 +11,8 @@ import {
 interface FloatingBottomNavProps {
   activeTab: 'inicio' | 'servicios' | 'catalogo' | 'cotizar' | 'favoritos' | 'enlaces' | 'nosotros';
   onSelectTab: (tab: 'inicio' | 'servicios' | 'catalogo') => void;
+  onOpenFavorites: () => void;
+  favoritesCount: number;
   onOpenQuoteModal: () => void;
   cartCount: number;
   cartTotal: number;
@@ -20,118 +22,137 @@ interface FloatingBottomNavProps {
 export const FloatingBottomNav: React.FC<FloatingBottomNavProps> = ({
   activeTab,
   onSelectTab,
+  onOpenFavorites,
+  favoritesCount,
   onOpenQuoteModal,
   cartCount,
   cartTotal,
   onOpenCart
 }) => {
   return (
-    <div className="fixed bottom-3.5 left-0 right-0 z-40 px-3 flex justify-center pointer-events-none">
+    <div className="fixed bottom-4 left-0 right-0 z-40 px-4 flex justify-center pointer-events-none">
       <motion.nav
-        initial={{ y: 50, opacity: 0 }}
+        initial={{ y: 40, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.35, ease: 'easeOut' }}
-        className="pointer-events-auto bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl border border-rose-200/80 dark:border-zinc-800 shadow-2xl rounded-[28px] p-1.5 flex items-center space-x-1 max-w-md w-full justify-between"
+        transition={{ duration: 0.3, ease: 'easeOut' }}
+        className="pointer-events-auto bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl border border-zinc-200/70 dark:border-zinc-800 shadow-xl rounded-full px-3 py-2 flex items-center justify-between max-w-sm w-full"
       >
         {/* 1. Inicio */}
-        <motion.button
-          whileTap={{ scale: 0.92 }}
+        <button
           type="button"
           onClick={() => onSelectTab('inicio')}
-          className={`relative flex-1 py-2 px-1 rounded-2xl flex flex-col items-center justify-center transition-all duration-200 cursor-pointer ${
-            activeTab === 'inicio' 
-              ? 'bg-rose-600 text-white shadow-xs' 
-              : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-rose-50/60 dark:hover:bg-zinc-800/60'
-          }`}
+          className="flex-1 flex flex-col items-center justify-center py-1 transition-colors cursor-pointer group"
         >
-          <Home className={`w-4 h-4 sm:w-4.5 sm:h-4.5 ${activeTab === 'inicio' ? 'stroke-[2.5]' : 'stroke-[1.75]'}`} />
-          <span className={`text-[10px] sm:text-[11px] font-gift font-bold mt-0.5 tracking-tight ${activeTab === 'inicio' ? 'text-white' : ''}`}>
+          <Home 
+            className={`w-5 h-5 transition-transform group-hover:scale-110 ${
+              activeTab === 'inicio' 
+                ? 'text-rose-600 dark:text-rose-400 stroke-[2.2]' 
+                : 'text-zinc-400 dark:text-zinc-500 stroke-[1.6]'
+            }`} 
+          />
+          <span 
+            className={`text-[10px] font-semibold tracking-tight mt-0.5 ${
+              activeTab === 'inicio' 
+                ? 'text-rose-600 dark:text-rose-400 font-bold' 
+                : 'text-zinc-500 dark:text-zinc-400'
+            }`}
+          >
             Inicio
           </span>
-        </motion.button>
+          {activeTab === 'inicio' && (
+            <motion.div 
+              layoutId="nav-active-dot" 
+              className="w-1 h-1 bg-rose-600 dark:bg-rose-400 rounded-full mt-0.5" 
+            />
+          )}
+        </button>
 
         {/* 2. Tienda */}
-        <motion.button
-          whileTap={{ scale: 0.92 }}
+        <button
           type="button"
           onClick={() => onSelectTab('catalogo')}
-          className={`relative flex-1 py-2 px-1 rounded-2xl flex flex-col items-center justify-center transition-all duration-200 cursor-pointer ${
-            activeTab === 'catalogo' 
-              ? 'bg-rose-600 text-white shadow-xs' 
-              : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-rose-50/60 dark:hover:bg-zinc-800/60'
-          }`}
+          className="flex-1 flex flex-col items-center justify-center py-1 transition-colors cursor-pointer group"
         >
-          <ShoppingBag className={`w-4 h-4 sm:w-4.5 sm:h-4.5 ${activeTab === 'catalogo' ? 'stroke-[2.5]' : 'stroke-[1.75]'}`} />
-          <span className={`text-[10px] sm:text-[11px] font-gift font-bold mt-0.5 tracking-tight ${activeTab === 'catalogo' ? 'text-white' : ''}`}>
+          <ShoppingBag 
+            className={`w-5 h-5 transition-transform group-hover:scale-110 ${
+              activeTab === 'catalogo' 
+                ? 'text-rose-600 dark:text-rose-400 stroke-[2.2]' 
+                : 'text-zinc-400 dark:text-zinc-500 stroke-[1.6]'
+            }`} 
+          />
+          <span 
+            className={`text-[10px] font-semibold tracking-tight mt-0.5 ${
+              activeTab === 'catalogo' 
+                ? 'text-rose-600 dark:text-rose-400 font-bold' 
+                : 'text-zinc-500 dark:text-zinc-400'
+            }`}
+          >
             Tienda
           </span>
-        </motion.button>
+          {activeTab === 'catalogo' && (
+            <motion.div 
+              layoutId="nav-active-dot" 
+              className="w-1 h-1 bg-rose-600 dark:bg-rose-400 rounded-full mt-0.5" 
+            />
+          )}
+        </button>
 
-        {/* 3. Servicios */}
-        <motion.button
-          whileTap={{ scale: 0.92 }}
+        {/* 3. Favoritos */}
+        <button
           type="button"
-          onClick={() => onSelectTab('servicios')}
-          className={`relative flex-1 py-2 px-1 rounded-2xl flex flex-col items-center justify-center transition-all duration-200 cursor-pointer ${
-            activeTab === 'servicios' 
-              ? 'bg-rose-600 text-white shadow-xs' 
-              : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-rose-50/60 dark:hover:bg-zinc-800/60'
-          }`}
+          onClick={onOpenFavorites}
+          className="flex-1 flex flex-col items-center justify-center py-1 transition-colors cursor-pointer group relative"
         >
-          <Sparkles className={`w-4 h-4 sm:w-4.5 sm:h-4.5 ${activeTab === 'servicios' ? 'stroke-[2.5]' : 'stroke-[1.75]'}`} />
-          <span className={`text-[10px] sm:text-[11px] font-gift font-bold mt-0.5 tracking-tight ${activeTab === 'servicios' ? 'text-white' : ''}`}>
-            Servicios
+          <div className="relative">
+            <Heart className="w-5 h-5 text-zinc-400 dark:text-zinc-500 stroke-[1.6] group-hover:text-rose-500 transition-colors" />
+            {favoritesCount > 0 && (
+              <span className="absolute -top-1 -right-2 bg-rose-600 text-white text-[8px] font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center font-mono">
+                {favoritesCount}
+              </span>
+            )}
+          </div>
+          <span className="text-[10px] font-semibold text-zinc-500 dark:text-zinc-400 tracking-tight mt-0.5">
+            Favoritos
           </span>
-        </motion.button>
+        </button>
 
-        {/* 4. Cotizar con Asesor (Replaces Favoritos) */}
-        <motion.button
-          whileTap={{ scale: 0.92 }}
-          whileHover={{ scale: 1.03 }}
+        {/* 4. Asesor Directo */}
+        <button
           type="button"
           onClick={onOpenQuoteModal}
-          className="relative flex-1 py-2 px-1 rounded-2xl flex flex-col items-center justify-center bg-emerald-50 dark:bg-emerald-950/50 hover:bg-emerald-100 dark:hover:bg-emerald-900/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200/80 dark:border-emerald-800/80 transition-all duration-200 cursor-pointer"
+          className="flex-1 flex flex-col items-center justify-center py-1 transition-colors cursor-pointer group relative"
         >
           <div className="relative">
-            <MessageCircle className="w-4 h-4 sm:w-4.5 sm:h-4.5 fill-emerald-600/20 stroke-[2] text-emerald-600 dark:text-emerald-400" />
+            <MessageCircle className="w-5 h-5 text-zinc-400 dark:text-zinc-500 stroke-[1.6] group-hover:text-rose-600 transition-colors" />
             <span className="absolute -top-0.5 -right-1 flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
             </span>
           </div>
-          <span className="text-[10px] sm:text-[11px] font-gift font-black mt-0.5 tracking-tight text-emerald-700 dark:text-emerald-300">
-            Asesor 📲
+          <span className="text-[10px] font-semibold text-zinc-500 dark:text-zinc-400 tracking-tight mt-0.5">
+            Asesor
           </span>
-        </motion.button>
+        </button>
 
-        {/* 5. Dynamic Cart Pill Button */}
-        <motion.button
-          whileTap={{ scale: 0.92 }}
-          whileHover={{ scale: 1.03 }}
+        {/* 5. Carrito */}
+        <button
           type="button"
           onClick={onOpenCart}
-          className="relative py-2 px-2.5 sm:px-3.5 rounded-2xl bg-zinc-950 dark:bg-white text-white dark:text-zinc-950 font-extrabold shadow-md flex items-center space-x-1.5 transition-all cursor-pointer font-gift animate-gift-glow shrink-0"
+          className="flex-1 flex flex-col items-center justify-center py-1 transition-colors cursor-pointer group relative"
         >
           <div className="relative">
-            <ShoppingCart className="w-4 h-4 text-amber-300 dark:text-amber-600" />
+            <ShoppingCart className="w-5 h-5 text-zinc-900 dark:text-white stroke-[1.8] group-hover:scale-110 transition-transform" />
             {cartCount > 0 && (
-              <span className="absolute -top-2 -right-2.5 bg-rose-600 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center font-mono border border-zinc-950 dark:border-white animate-pulse">
+              <span className="absolute -top-1.5 -right-2 bg-rose-600 text-white text-[9px] font-bold px-1 min-w-4 h-4 rounded-full flex items-center justify-center font-mono animate-bounce">
                 {cartCount}
               </span>
             )}
           </div>
-          <div className="text-left leading-none pl-0.5">
-            <span className="text-[9px] uppercase tracking-wider block text-amber-300 dark:text-amber-600 font-extrabold">
-              Canasta
-            </span>
-            <span className="text-[10px] sm:text-[11px] font-black font-display text-white dark:text-zinc-950 block">
-              S/. {cartTotal.toFixed(2)}
-            </span>
-          </div>
-        </motion.button>
-
+          <span className="text-[10px] font-bold text-zinc-900 dark:text-white tracking-tight mt-0.5">
+            Carrito
+          </span>
+        </button>
       </motion.nav>
     </div>
   );
 };
-
