@@ -1,6 +1,6 @@
 {
   "name": "Boho Import - Enlaces y Catálogo",
-  "description": "Directorio interactivo de redes sociales, catálogo de bolsas de regalo y calculadora de combos personalizados para Boho Import.",
+  "description": "SuperApp Mobile-First para Boho Import: Catálogo mayorista 3D interactivo, carruseles de deslizamiento rápido, cotización y cierre de venta directo por WhatsApp, carrito con delivery y modo claro/oscuro.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

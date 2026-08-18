@@ -30,6 +30,7 @@ import { PRODUCTS } from '../data';
 
 export default function WidgetCatalog() {
   const [selectedCategory, setSelectedCategory] = useState<string>('todos');
+  const [selectedOccasion, setSelectedOccasion] = useState<string>('todas');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   
@@ -67,12 +68,14 @@ export default function WidgetCatalog() {
   const filteredProducts = useMemo(() => {
     return PRODUCTS.filter((p) => {
       const matchesCategory = selectedCategory === 'todos' || p.category === selectedCategory;
+      const matchesOccasion = selectedOccasion === 'todas' || (p.occasions && p.occasions.some(occ => occ.toLowerCase().includes(selectedOccasion.toLowerCase())));
       const matchesSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
                             p.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                            (p.material && p.material.toLowerCase().includes(searchQuery.toLowerCase())) ||
                             p.features.some(f => f.toLowerCase().includes(searchQuery.toLowerCase()));
-      return matchesCategory && matchesSearch;
+      return matchesCategory && matchesOccasion && matchesSearch;
     });
-  }, [selectedCategory, searchQuery]);
+  }, [selectedCategory, selectedOccasion, searchQuery]);
 
   const toggleFavorite = (id: string, e: React.MouseEvent) => {
     e.stopPropagation();
@@ -564,27 +567,57 @@ export default function WidgetCatalog() {
           )}
         </div>
 
-        {/* Tab Filters */}
-        <div className="flex space-x-1.5 overflow-x-auto pb-1 scrollbar-thin">
-          {[
-            { id: 'todos', label: 'Todos 🛍️' },
-            { id: 'bolsas', label: 'Bolsas 🛍️' },
-            { id: 'cajas', label: 'Cajas 📦' },
-            { id: 'accesorios', label: 'Accesorios 🎀' }
-          ].map((tab) => (
-            <button
-              key={tab.id}
-              type="button"
-              onClick={() => setSelectedCategory(tab.id)}
-              className={`px-3.5 py-1.5 rounded-full text-xs font-semibold font-display tracking-tight whitespace-nowrap transition-all duration-300 border shrink-0 ${
-                selectedCategory === tab.id
-                  ? 'bg-zinc-900 border-zinc-900 text-white shadow-sm'
-                  : 'bg-zinc-50 border-zinc-100 text-zinc-600 hover:bg-zinc-100'
-              }`}
-            >
-              {tab.label}
-            </button>
-          ))}
+        {/* Category Tab Filters */}
+        <div className="space-y-2">
+          <div className="flex space-x-1.5 overflow-x-auto pb-1 scrollbar-thin">
+            {[
+              { id: 'todos', label: 'Todos 🛍️' },
+              { id: 'bolsas', label: 'Bolsas Llanas 🛍️' },
+              { id: 'cajas', label: 'Cajas de Regalo 📦' },
+              { id: 'accesorios', label: 'Toppers & Papel 🎀' }
+            ].map((tab) => (
+              <button
+                key={tab.id}
+                type="button"
+                onClick={() => setSelectedCategory(tab.id)}
+                className={`px-3.5 py-1.5 rounded-full text-xs font-semibold font-display tracking-tight whitespace-nowrap transition-all duration-300 border shrink-0 cursor-pointer ${
+                  selectedCategory === tab.id
+                    ? 'bg-zinc-900 border-zinc-900 text-white shadow-sm'
+                    : 'bg-zinc-50 border-zinc-100 text-zinc-600 hover:bg-zinc-100'
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Occasions Quick Filter Chips */}
+          <div className="flex space-x-1.5 overflow-x-auto pb-0.5 scrollbar-thin items-center">
+            <span className="text-[10px] font-bold text-zinc-400 uppercase font-gift shrink-0">Ocasión:</span>
+            {[
+              { id: 'todas', label: '✨ Todas' },
+              { id: 'Padre', label: '👔 Día del Padre' },
+              { id: 'Madre', label: '👑 Día de la Madre' },
+              { id: 'Amor', label: '❤️ Amor' },
+              { id: 'Cumpleaños', label: '🎂 Cumpleaños' },
+              { id: 'Graduación', label: '🎓 Graduación' },
+              { id: 'Niño', label: '🧸 Niños' },
+              { id: 'Corporativo', label: '💼 Corporativo' }
+            ].map((occ) => (
+              <button
+                key={occ.id}
+                type="button"
+                onClick={() => setSelectedOccasion(occ.id)}
+                className={`px-2.5 py-1 rounded-lg text-[11px] font-medium tracking-tight whitespace-nowrap transition-all duration-200 shrink-0 cursor-pointer ${
+                  selectedOccasion === occ.id
+                    ? 'bg-rose-100 dark:bg-rose-950 text-rose-800 dark:text-rose-200 font-bold border border-rose-300 dark:border-rose-800 shadow-2xs'
+                    : 'bg-zinc-100/70 text-zinc-600 hover:bg-zinc-200/70 border border-transparent'
+                }`}
+              >
+                {occ.label}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -654,6 +687,13 @@ export default function WidgetCatalog() {
                 {/* Info space */}
                 <div className="p-3 sm:p-3.5 flex-1 flex flex-col justify-between space-y-2">
                   <div>
+                    {/* Material & Unit micro badge */}
+                    {product.material && (
+                      <span className="text-[9px] font-mono font-bold text-rose-600 bg-rose-50 px-1.5 py-0.5 rounded uppercase block truncate mb-1">
+                        🧵 {product.material}
+                      </span>
+                    )}
+
                     <h4 className="font-bold text-zinc-800 text-xs sm:text-sm font-display tracking-tight line-clamp-1 leading-snug group-hover:text-rose-600 transition-colors">
                       {product.name}
                     </h4>

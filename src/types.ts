@@ -2,7 +2,7 @@ export interface Product {
   id: string;
   name: string;
   description: string;
-  price: number; // S/. price
+  price: number; // S/. price (unitario o base)
   originalPrice?: number;
   wholesalePrice: number; // S/. wholesale price
   minWholesaleQty: number; // minimum quantity for wholesale price
@@ -13,8 +13,12 @@ export interface Product {
   sizes: string[];
   features: string[];
   inStock: boolean;
-  variants?: string[]; // Custom product variations like team, style, design
-  priceLevels?: { qty: number; price: number; label: string }[]; // Multi-tiered pricing
+  variants?: string[]; // Custom product variations like team, style, occasion, design
+  priceLevels?: { qty: number; price: number; label: string }[]; // Multi-tiered pricing (Unidad / Docena / Ciento)
+  material?: string; // e.g. 'CORROSPUM', 'FOLCOTE', 'CARTON', 'CARTON PRENSADO', 'LLANA', '80GR'
+  occasions?: string[]; // e.g. ['Amor', 'Día del Padre', 'Día de la Madre', 'Cumpleaños', 'Baby Shower', 'Corporativo']
+  unitMeasure?: string; // 'Docena', 'Ciento', 'Medio Ciento', 'Unidad'
+  sizePricing?: { size: string; dozenPrice: number; unitPrice?: number; dimensions?: string }[];
 }
 
 export type BagType = 'kraft' | 'estampada' | 'metalizada' | 'caja_bow';
@@ -44,5 +48,20 @@ export interface CartItem {
   unitPrice: number;
   total: number;
   priceLabel: string;
+}
+
+export interface ServiceItem {
+  id: string;
+  title: string;
+  category: string;
+  tag: string;
+  description: string;
+  estimatedTime: string;
+  startingPrice: number;
+  popular: boolean;
+  iconName: string;
+  features: string[];
+  benefits: string;
+  gradient: string;
 }
 
